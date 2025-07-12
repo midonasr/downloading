@@ -1,0 +1,48 @@
+syntax = "proto3";
+option csharp_namespace = "StorageService.Api.Protos";
+
+service StorageService {
+  rpc Upload (UploadRequest) returns (UploadReply);
+  rpc Delete (DeleteRequest) returns (DeleteReply);
+  rpc GetMetadata (GetMetadataRequest) returns (GetMetadataReply);
+  rpc Download (DownloadRequest) returns (DownloadReply);
+}
+
+
+message DownloadRequest {
+  string id = 1;
+}
+
+message DownloadReply {
+  string filename = 1;
+  bytes content = 2;
+}
+
+message UploadRequest {
+  string filename = 1;
+  bytes content = 2;
+}
+
+message UploadReply {
+  string id = 1;
+}
+
+message DeleteRequest {
+  string id = 1;
+}
+
+message DeleteReply {
+  bool success = 1;
+}
+
+message GetMetadataRequest {
+  string id = 1;
+}
+
+message GetMetadataReply {
+  string id = 1;
+  string filename = 2;
+  int64 size = 3;
+  string uploadedAt = 4;
+  bool isInfected = 5;
+}
